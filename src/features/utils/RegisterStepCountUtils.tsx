@@ -20,3 +20,10 @@ export const displayIcon = (step: number): React.ReactElement => {
 
     }
 }
+
+export const displayIconCheck = (step: number): string => {
+    if (step === 4 || step === 6) {
+        return "reg-step-counter-btm-disabled"
+    }
+    return "reg-step-counter-btm"
+}

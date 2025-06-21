@@ -12,7 +12,7 @@
     width: 40px;
     height: 40px;
     display: flex;
-    margin: 40px;
+    margin-right: 40px;
     justify-content: center;
     align-items: center;
 }
@@ -30,4 +30,10 @@
     font-family: 'Ubuntu', san-serif;
     font-weight: 400;
     font-size: 20px;
+}
+
+.reg-step-counter-btm-disabled {
+    height: 40px;
+    width: 40px;
+    margin-right: 40px;
 }
