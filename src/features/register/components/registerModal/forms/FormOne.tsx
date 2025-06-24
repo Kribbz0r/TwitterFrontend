@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TextInput } from '../../../../../components/modal/textInput/TextInput'
+import { TextInput } from '../../../../../components/textInput/TextInput'
 import './formOne.css'
 
 interface FormOneState {
