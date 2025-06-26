@@ -10,7 +10,7 @@ const theme: Theme = {
         blue: '#1DA1F2',
         black: '#14171a',
         darkGray: '#657786',
-        gray: '#AAB8C2',
+        gray: '#8a8b8b',
         lightGray: '#AAB8C8',
         white: '#F5F8FA',
         error: 'red'

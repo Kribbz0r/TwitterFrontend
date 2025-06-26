@@ -1,5 +1,5 @@
 import { act } from "react";
-import { StyledInputBox } from "../../components/validInput/ValidInput";
+import { StyledInputBox } from "../../components/validatedInput/StyledInput";
 import { StyledInputProps } from "./GlogalInterfaces";
 
 export const determinStyledInputBorder = (props: StyledInputProps): string => {
@@ -15,7 +15,7 @@ export const determinStyledInputBorder = (props: StyledInputProps): string => {
     }
 
     if (active && valid) {
-        `2px solid ${theme.colors.blue}`
+        return `2px solid ${theme.colors.blue}`;
     }
 
     if (active && !valid) {
@@ -38,5 +38,5 @@ export const determineLabelColor = (props: StyledInputProps): string => {
     }
 
 
-    return theme.colors.lightGray;
+    return theme.colors.gray;
 }
