@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TextInput } from '../../../../../components/textInput/TextInput'
+import { ValidateName } from '../../../../../services/Validators';
 import { ValidatedInput } from '../../../../../components/validatedInput/ValidatedInput';
 import './formOne.css'
 
@@ -32,8 +32,8 @@ export const FormOne: React.FC = () => {
     return (
         <div className='registerStepOneContainer'>
             <div className='registerStepOneContent'>
-                <ValidatedInput name={"firstName"} label={"First"} errorMessage='What is your name' changeValue={updateUser} validator={() => true}></ValidatedInput>
-                <ValidatedInput name={"lastName"} label={"Last"} errorMessage='What is your surname' changeValue={updateUser} validator={() => true}></ValidatedInput>
+                <ValidatedInput name={"firstName"} label={"First"} errorMessage='What is your name' changeValue={updateUser} validator={ValidateName}></ValidatedInput>
+                <ValidatedInput name={"lastName"} label={"Last"} errorMessage='What is your surname' changeValue={updateUser} validator={ValidateName}></ValidatedInput>
                 <ValidatedInput name={"email"} label={"Email"} errorMessage='Please enter a valid email' changeValue={updateUser} validator={() => true}></ValidatedInput>
 
             </div>

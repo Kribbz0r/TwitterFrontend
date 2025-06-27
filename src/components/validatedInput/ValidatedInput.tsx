@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { ValidatedImputState } from '../../features/utils/GlogalInterfaces';
+import { ValidatedInputState } from '../../features/utils/GlogalInterfaces';
 import { StyledInputBox, StyledInputLabel } from './StyledInput'
+import { determineValidatedStyles } from '../../features/utils/DeterminStyleUtils';
 import './validatedInput.css'
 
 
@@ -15,7 +16,7 @@ interface ValidatedUserInputProps {
 
 export const ValidatedInput: React.FC<ValidatedUserInputProps> = ({ changeValue, errorMessage, label, name, validator, attributes }) => {
 
-    const [validatedState, setValidatedState] = useState<ValidatedImputState>({
+    const [validatedState, setValidatedState] = useState<ValidatedInputState>({
         active: false,
         valid: true,
         typedIn: false,
@@ -31,6 +32,11 @@ export const ValidatedInput: React.FC<ValidatedUserInputProps> = ({ changeValue,
             active: !validatedState?.active
         })
     }
+
+    useEffect(() => {
+        setValidatedState(determineValidatedStyles(validatedState, validator));
+
+    }, [validatedState.active, validatedState.labelActive, validatedState.labelColor, validatedState.typedIn, validatedState.value]);
 
     const updateValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setValidatedState({
@@ -56,7 +62,7 @@ export const ValidatedInput: React.FC<ValidatedUserInputProps> = ({ changeValue,
                         {...attributes} />
 
                 </StyledInputBox>
-                <span>{errorMessage}</span>
+                {validatedState.valid ? "" : <span>{errorMessage}</span>}
             </div>
 
         </div>
