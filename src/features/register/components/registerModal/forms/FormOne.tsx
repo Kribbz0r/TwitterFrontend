@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ValidateName } from '../../../../../services/Validators';
 import { ValidatedInput } from '../../../../../components/validatedInput/ValidatedInput';
 import './formOne.css'
+import { RegisterDateInput } from '../registerDateInput/RegisterDateInput';
 
 interface FormOneState {
     firstName: string;
@@ -35,7 +36,7 @@ export const FormOne: React.FC = () => {
                 <ValidatedInput name={"firstName"} label={"First"} errorMessage='What is your name' changeValue={updateUser} validator={ValidateName}></ValidatedInput>
                 <ValidatedInput name={"lastName"} label={"Last"} errorMessage='What is your surname' changeValue={updateUser} validator={ValidateName}></ValidatedInput>
                 <ValidatedInput name={"email"} label={"Email"} errorMessage='Please enter a valid email' changeValue={updateUser} validator={() => true}></ValidatedInput>
-
+                <RegisterDateInput />
             </div>
 
         </div>

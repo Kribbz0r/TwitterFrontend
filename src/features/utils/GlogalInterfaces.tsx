@@ -20,6 +20,12 @@ export interface StyledInputProps {
     color?: string;
 }
 
+export interface DateOfBirth {
+    day: number;
+    month: number;
+    year: number;
+}
+
 export interface ValidatedInputState {
     active: boolean;
     valid: boolean;
