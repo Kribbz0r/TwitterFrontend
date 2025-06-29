@@ -1,5 +1,6 @@
 import React from "react";
 import { ValidatedDateSelector } from "../../../../../components/validatedInput/ValidatedDateSelector";
+import { getDays, getMonths, getYears } from "../../../../utils/DateUtils";
 
 
 
@@ -10,23 +11,17 @@ export const RegisterDateInput: React.FC = () => {
                 style={"validatedDay"}
                 valid={true}
                 name={"Day"}
-                dropDown={
-                    () => { return [] }
-                } />
+                dropDown={getDays} />
             <ValidatedDateSelector
                 style={"validatedMonth"}
                 valid={true}
                 name={"Month"}
-                dropDown={
-                    () => { return [] }
-                } />
+                dropDown={getMonths} />
             <ValidatedDateSelector
                 style={"validatedYear"}
                 valid={true}
                 name={"Year"}
-                dropDown={
-                    () => { return [] }
-                } />
+                dropDown={getYears} />
         </div>
     );
 }
