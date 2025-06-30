@@ -42,7 +42,7 @@ export const getYears = (): React.ReactElement[] => {
 
     let year = new Date().getFullYear() + 1;
 
-    for (let i = year; i > 1970; i--) {
+    for (let i = year; i > 1900; i--) {
         if (i === year) {
             options.push(<option value={0} key={i}></option>)
         } else {
