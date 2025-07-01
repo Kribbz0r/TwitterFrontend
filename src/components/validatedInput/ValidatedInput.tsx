@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ValidatedInputState } from '../../features/utils/GlogalInterfaces';
 import { StyledInputBox, StyledInputLabel } from './StyledInput'
 import { determineValidatedStyles } from '../../features/utils/DeterminStyleUtils';
+
 import './validatedInput.css'
 
 
@@ -17,6 +18,10 @@ interface ValidatedUserInputProps {
 export const ValidatedInput: React.FC<ValidatedUserInputProps> = ({ changeValue, errorMessage, label, name, validator, attributes }) => {
 
     const [validatedState, setValidatedState] = useState<ValidatedInputState>({
+        // active and valid error
+        // Received `false` for a non-boolean attribute `active`.
+        // Received `true` for a non-boolean attribute `valid`.
+        // Something is wrong with redux settings
         active: false,
         valid: true,
         typedIn: false,
