@@ -38,7 +38,7 @@ export const ValidatedDateSelector: React.FC<ValidatedDateSelectorProps> = ({ st
                 <StyledInputLabel color={color} active={true} valid={valid}>
                     {name}
                 </StyledInputLabel>
-                <select onChange={() => { }} onFocus={toggleAvtive} onBlur={toggleAvtive}>
+                <select onChange={changeValue} onFocus={toggleAvtive} onBlur={toggleAvtive}>
                     {dropDown()}
                 </select>
             </StyledInputBox>
