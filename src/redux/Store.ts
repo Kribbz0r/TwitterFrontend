@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import registerReducer from "../redux/slices/RegisterSlice";
 
 export const store = configureStore({
-    reducer: {}
+    reducer: { register: registerReducer }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
