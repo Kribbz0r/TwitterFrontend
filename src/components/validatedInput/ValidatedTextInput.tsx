@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { StyledInputBox, StyledInputLabel } from "./StyledInput";
+import { determineValidatedTextLabel } from "../../features/utils/DeterminStyleUtils";
 
-export const ValidatedTextInput: React.FC = () => {
+interface ValidatedTextInputProps {
+    valid: boolean;
+    name: string;
+    label: string;
+    changeValue(e: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+export const ValidatedTextInput: React.FC<ValidatedTextInputProps> = ({ valid, name, label, changeValue }) => {
 
     const [value, setValue] = useState<string>("");
     const [borderActive, setBorderActive] = useState<boolean>(false);
@@ -18,6 +26,7 @@ export const ValidatedTextInput: React.FC = () => {
     const update = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setValue(e.target.value);
         console.log("Send info back to dispatcher");
+        changeValue(e)
     }
 
     useEffect(() => {
@@ -25,18 +34,18 @@ export const ValidatedTextInput: React.FC = () => {
             setLabelActive(true);
         }
 
+        setColor(determineValidatedTextLabel(borderActive, valid))
 
-
-    }, [value, borderActive, labelActive, color])
+    }, [valid, value, borderActive, labelActive, color])
 
     return (
         <div className="validatedTextInput">
-            <StyledInputBox active={borderActive} valid={true}>
-                <StyledInputLabel color={color} active={labelActive} valid={true}>
-                    {'label here'}
+            <StyledInputBox active={borderActive} valid={valid}>
+                <StyledInputLabel color={color} active={labelActive} valid={valid}>
+                    {label}
                 </StyledInputLabel>
                 <input className="validatedInputValue"
-                    name={'name'}
+                    name={name}
                     onFocus={focus}
                     onBlur={focus}
                     onChange={update}

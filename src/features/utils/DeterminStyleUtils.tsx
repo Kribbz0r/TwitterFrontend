@@ -90,3 +90,15 @@ export const determinValididSelectStyle = (active: boolean, valid: boolean): str
 
     return "gray"
 }
+
+export const determineValidatedTextLabel = (active: boolean, valid: boolean): string => {
+    if (!valid && active) {
+        return 'error';
+    }
+
+    if (valid && active) {
+        return 'blue';
+    }
+
+    return 'gray';
+}

@@ -5,7 +5,7 @@ interface RegisterSliceState {
     loading: boolean;
     error: boolean;
     firstName: string;
-    fistNameValid: boolean;
+    firstNameValid: boolean;
     lastName: string;
     lastNameValid: boolean;
     email: string;
@@ -24,7 +24,7 @@ const initialState: RegisterSliceState = {
     loading: false,
     error: false,
     firstName: "",
-    fistNameValid: false,
+    firstNameValid: false,
     lastName: "",
     lastNameValid: false,
     email: "",
