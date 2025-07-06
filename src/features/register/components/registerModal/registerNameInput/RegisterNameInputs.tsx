@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ValidatedTextInput } from '../../../../../components/validatedInput/ValidatedTextInput';
-import { useDispatch, UseDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../../redux/Store';
 import { updateRegister } from '../../../../../redux/slices/RegisterSlice';
 import { ValidateName } from '../../../../../services/Validators';
@@ -36,8 +36,8 @@ export const RegisterNameInputs: React.FC = () => {
 
     return (
         <div className='registerNameInput'>
-            <ValidatedTextInput valid={true} name={'firstName'} label='First' changeValue={updateName} />
-            <ValidatedTextInput valid={true} name={'lastName'} label='Last' changeValue={updateName} />
+            <ValidatedTextInput valid={fisrtNameValid} name={'firstName'} label='First' changeValue={updateName} />
+            <ValidatedTextInput valid={lastNameValid} name={'lastName'} label='Last' changeValue={updateName} />
 
         </div>
     )

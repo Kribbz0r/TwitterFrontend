@@ -4,6 +4,7 @@ import { ValidatedInput } from '../../../../../components/validatedInput/Validat
 import './formOne.css'
 import { RegisterDateInput } from '../registerDateInput/RegisterDateInput';
 import { RegisterNameInputs } from '../registerNameInput/RegisterNameInputs';
+import { RegisterEmailInput } from '../registerEmailInput/RegisterEmailInput';
 
 interface FormOneState {
     firstName: string;
@@ -35,7 +36,7 @@ export const FormOne: React.FC = () => {
         <div className='registerStepOneContainer'>
             <div className='registerStepOneContent'>
                 <RegisterNameInputs />
-                <ValidatedInput name={"email"} label={"Email"} errorMessage='Please enter a valid email' changeValue={updateUser} validator={() => true}></ValidatedInput>
+                <RegisterEmailInput />
                 <RegisterDateInput />
             </div>
 
