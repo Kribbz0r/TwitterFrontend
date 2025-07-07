@@ -21,7 +21,8 @@ export const ValidatedInput: React.FC<ValidatedUserInputProps> = ({ changeValue,
         // active and valid error
         // Received `false` for a non-boolean attribute `active`.
         // Received `true` for a non-boolean attribute `valid`.
-        // Something is wrong with redux settings
+        // cant pass boolean in html.
+        // Styled components should be able to handle this i think
         active: false,
         valid: true,
         typedIn: false,

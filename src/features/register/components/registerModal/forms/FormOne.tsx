@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { ValidateName } from '../../../../../services/Validators';
-import { ValidatedInput } from '../../../../../components/validatedInput/ValidatedInput';
+import { useSelector, UseSelector } from 'react-redux';
+import { RootState } from '../../../../../redux/Store';
 import './formOne.css'
 import { RegisterDateInput } from '../registerDateInput/RegisterDateInput';
 import { RegisterNameInputs } from '../registerNameInput/RegisterNameInputs';
 import { RegisterEmailInput } from '../registerEmailInput/RegisterEmailInput';
+import { StyledNextBtn } from '../../registrationNextBtn/RegisterNextBtn';
 
 interface FormOneState {
     firstName: string;
@@ -16,21 +17,21 @@ interface FormOneState {
 
 export const FormOne: React.FC = () => {
 
-    const [stepOneState, setStepOneState] = useState<FormOneState>({
-        firstName: "",
-        lastName: "",
-        email: "",
-        dateOfBirth: ""
-    });
+    const registerState = useSelector((state: RootState) => state.register);
 
 
-    const updateUser = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setStepOneState({ ...stepOneState, [e.target.name]: e.target.value });
-    }
+    const [btnActive, setBtnActive] = useState<boolean>(false)
+
+
 
     useEffect(() => {
-        console.log("New State: ", stepOneState);
-    }, [stepOneState])
+        if (registerState.dateOfBirthValid && registerState.emailValid && registerState.firstNameValid && registerState.lastNameValid) {
+            setBtnActive(true);
+        } else {
+            setBtnActive(false);
+        }
+
+    }, [registerState])
 
     return (
         <div className='registerStepOneContainer'>
@@ -39,6 +40,9 @@ export const FormOne: React.FC = () => {
                 <RegisterEmailInput />
                 <RegisterDateInput />
             </div>
+            <StyledNextBtn disabled={!btnActive} color={"black"} active={btnActive} onClick={() => console.log("Click for next page")}>
+                Next
+            </StyledNextBtn>
 
         </div>
     )

@@ -34,3 +34,9 @@ export interface ValidatedInputState {
     labelColor: string;
     value: string;
 }
+
+export interface StyledNextBtnProps {
+    active: boolean;
+    theme: Theme;
+    color: string;
+}
