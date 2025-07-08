@@ -8,10 +8,11 @@ interface ValidatedDateSelectorProps {
     name: string;
     dropDown(): React.ReactElement[];
     dispatcher(name: string, value: string | number | boolean): void;
+    data?: number;
 }
 
 
-export const ValidatedDateSelector: React.FC<ValidatedDateSelectorProps> = ({ style, valid, name, dropDown, dispatcher }) => {
+export const ValidatedDateSelector: React.FC<ValidatedDateSelectorProps> = ({ style, valid, name, dropDown, dispatcher, data }) => {
 
     const [active, setActive] = useState<boolean>(false);
     const [value, setValue] = useState<number>(0);
@@ -38,7 +39,7 @@ export const ValidatedDateSelector: React.FC<ValidatedDateSelectorProps> = ({ st
                 <StyledInputLabel color={color} active={true} valid={valid}>
                     {name}
                 </StyledInputLabel>
-                <select onChange={changeValue} onFocus={toggleAvtive} onBlur={toggleAvtive}>
+                <select onChange={changeValue} onFocus={toggleAvtive} onBlur={toggleAvtive} value={data}>
                     {dropDown()}
                 </select>
             </StyledInputBox>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, UseSelector } from 'react-redux';
-import { RootState } from '../../../../../redux/Store';
+import { useDispatch, useSelector, UseSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../../../../redux/Store';
+import { increaseStep } from '../../../../../redux/slices/RegisterSlice';
 import './formOne.css'
 import { RegisterDateInput } from '../registerDateInput/RegisterDateInput';
 import { RegisterNameInputs } from '../registerNameInput/RegisterNameInputs';
@@ -18,10 +19,13 @@ interface FormOneState {
 export const FormOne: React.FC = () => {
 
     const registerState = useSelector((state: RootState) => state.register);
-
+    const dispatch: AppDispatch = useDispatch();
 
     const [btnActive, setBtnActive] = useState<boolean>(false)
 
+    const nextPage = () => {
+        dispatch(increaseStep());
+    }
 
 
     useEffect(() => {
@@ -36,11 +40,11 @@ export const FormOne: React.FC = () => {
     return (
         <div className='registerStepOneContainer'>
             <div className='registerStepOneContent'>
-                <RegisterNameInputs />
-                <RegisterEmailInput />
-                <RegisterDateInput />
+                <RegisterNameInputs firstName={registerState.firstName} lastName={registerState.lastName} />
+                <RegisterEmailInput email={registerState.email} />
+                <RegisterDateInput date={registerState.dateOfBirth} />
             </div>
-            <StyledNextBtn disabled={!btnActive} color={"black"} active={btnActive} onClick={() => console.log("Click for next page")}>
+            <StyledNextBtn disabled={!btnActive} color={"black"} active={btnActive} onClick={nextPage}>
                 Next
             </StyledNextBtn>
 

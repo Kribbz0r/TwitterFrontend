@@ -5,7 +5,12 @@ import { AppDispatch } from "../../../../../redux/Store";
 import { updateRegister } from "../../../../../redux/slices/RegisterSlice";
 import { validateEmail } from "../../../../../services/Validators"
 
-export const RegisterEmailInput: React.FC = () => {
+
+interface RegisterEmailInputProps {
+    email: string;
+}
+
+export const RegisterEmailInput: React.FC<RegisterEmailInputProps> = ({ email }) => {
     const [vaildEmail, setValidEmail] = useState<boolean>(true);
 
     const dispatch: AppDispatch = useDispatch();
@@ -26,7 +31,7 @@ export const RegisterEmailInput: React.FC = () => {
 
     return (
         <div className="registerEmailInput">
-            <ValidatedTextInput valid={vaildEmail} label={"Email"} name={"email"} changeValue={updateEmail} />
+            <ValidatedTextInput valid={vaildEmail} label={"Email"} name={"email"} changeValue={updateEmail} data={email} />
 
         </div>
     )

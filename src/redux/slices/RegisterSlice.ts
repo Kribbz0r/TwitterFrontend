@@ -12,6 +12,7 @@ interface RegisterSliceState {
     emailValid: boolean;
     dateOfBirth: DateOfBirth;
     dateOfBirthValid: boolean;
+    step: number;
 }
 
 
@@ -34,7 +35,8 @@ const initialState: RegisterSliceState = {
         month: 0,
         year: 0
     },
-    dateOfBirthValid: false
+    dateOfBirthValid: false,
+    step: 1
 }
 
 export const RegisterSlice = createSlice({
@@ -61,11 +63,26 @@ export const RegisterSlice = createSlice({
 
 
             return state;
+        },
+
+        increaseStep(state) {
+            state.step++;
+            return state;
+        },
+
+        decreaseStep(state) {
+            if (state.step === 1 || state.step === 4 || state.step >= 6) {
+                return state;
+            } else {
+                state.step--;
+                return state;
+            }
         }
+
 
     }
 });
 
-export const { updateRegister } = RegisterSlice.actions;
+export const { updateRegister, increaseStep, decreaseStep } = RegisterSlice.actions;
 
 export default RegisterSlice.reducer;

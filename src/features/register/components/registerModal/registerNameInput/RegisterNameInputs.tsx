@@ -5,8 +5,13 @@ import { AppDispatch } from '../../../../../redux/Store';
 import { updateRegister } from '../../../../../redux/slices/RegisterSlice';
 import { ValidateName } from '../../../../../services/Validators';
 
+interface RegisterNameInputProps {
+    firstName: string;
+    lastName: string;
+}
 
-export const RegisterNameInputs: React.FC = () => {
+
+export const RegisterNameInputs: React.FC<RegisterNameInputProps> = ({ firstName, lastName }) => {
 
     const [fisrtNameValid, setFirstNameValid] = useState<boolean>(true);
     const [lastNameValid, setLastNameValid] = useState<boolean>(true);
@@ -36,8 +41,8 @@ export const RegisterNameInputs: React.FC = () => {
 
     return (
         <div className='registerNameInput'>
-            <ValidatedTextInput valid={fisrtNameValid} name={'firstName'} label='First' changeValue={updateName} />
-            <ValidatedTextInput valid={lastNameValid} name={'lastName'} label='Last' changeValue={updateName} />
+            <ValidatedTextInput valid={fisrtNameValid} name={'firstName'} label='First' changeValue={updateName} data={firstName} />
+            <ValidatedTextInput valid={lastNameValid} name={'lastName'} label='Last' changeValue={updateName} data={lastName} />
 
         </div>
     )
