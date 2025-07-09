@@ -1,0 +1,20 @@
+.registerNameInput {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.registerNameContent {
+    width: 45%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.registerNameError {
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 20px;
+}

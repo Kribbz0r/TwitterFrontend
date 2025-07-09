@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { StyledInputBox, StyledInputLabel } from "./StyledInput";
 import { determinValididSelectStyle } from "../../features/utils/DeterminStyleUtils";
 
+import "./validatedInput.css"
+import { ExpandMoreRounded } from "@mui/icons-material";
+
+
 interface ValidatedDateSelectorProps {
     style: string;
     valid: boolean;
@@ -34,12 +38,19 @@ export const ValidatedDateSelector: React.FC<ValidatedDateSelectorProps> = ({ st
     }, [active, valid, value])
 
     return (
-        <div className={style}>
+        <div className='validatedInput'>
             <StyledInputBox active={active} valid={valid}>
                 <StyledInputLabel color={color} active={true} valid={valid}>
                     {name}
+                    <ExpandMoreRounded sx={{
+                        fontSize: 34,
+                        color: active ? '#1DA1F2' : '#657786',
+                        position: 'absolute',
+                        right: '15px',
+                        top: '35%'
+                    }} />
                 </StyledInputLabel>
-                <select onChange={changeValue} onFocus={toggleAvtive} onBlur={toggleAvtive} value={data}>
+                <select className='validatedInputValue validatedDateSelector' onChange={changeValue} onFocus={toggleAvtive} onBlur={toggleAvtive} value={data}>
                     {dropDown()}
                 </select>
             </StyledInputBox>
