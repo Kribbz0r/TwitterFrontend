@@ -7,6 +7,8 @@ import { getDays, getMonths, getYears } from "../../../../utils/DateUtils";
 import { validateDateOfBirth } from "../../../../../services/Validators";
 import { DateOfBirth } from "../../../../utils/GlogalInterfaces";
 
+import "./registerDateInput.css"
+
 interface RegisterDateInputProps {
     date: DateOfBirth;
 }
@@ -41,30 +43,36 @@ export const RegisterDateInput: React.FC<RegisterDateInputProps> = ({ date }) =>
 
     return (
         <div className="registerDate">
-            <ValidatedDateSelector
-                style={"validatedDay"}
-                valid={valid}
-                name={"Day"}
-                dropDown={getDays}
-                dispatcher={updateState}
-                data={date.day} />
-
-            <ValidatedDateSelector
-                style={"validatedMonth"}
-                valid={valid}
-                name={"Month"}
-                dropDown={getMonths}
-                dispatcher={updateState}
-                data={date.month} />
-
-            <ValidatedDateSelector
-                style={"validatedYear"}
-                valid={valid}
-                name={"Year"}
-                dropDown={getYears}
-                dispatcher={updateState}
-                data={date.year} />
-
+            <div className="registerDateContent">
+                <div className="registerDateDay">
+                    <ValidatedDateSelector
+                        style={"validatedDay"}
+                        valid={valid}
+                        name={"Day"}
+                        dropDown={getDays}
+                        dispatcher={updateState}
+                        data={date.day} />
+                </div>
+                <div className="registerDateMonth">
+                    <ValidatedDateSelector
+                        style={"validatedMonth"}
+                        valid={valid}
+                        name={"Month"}
+                        dropDown={getMonths}
+                        dispatcher={updateState}
+                        data={date.month} />
+                </div>
+                <div className="registerDateYear">
+                    <ValidatedDateSelector
+                        style={"validatedYear"}
+                        valid={valid}
+                        name={"Year"}
+                        dropDown={getYears}
+                        dispatcher={updateState}
+                        data={date.year} />
+                </div>
+            </div>
+            {valid ? <></> : <span className="registerDateError">You may not be younger than 13. Please enter a valid date.</span>}
         </div>
     );
 }

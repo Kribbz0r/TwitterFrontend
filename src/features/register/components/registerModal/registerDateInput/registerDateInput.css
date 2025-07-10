@@ -1,0 +1,30 @@
+.registerDate {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.registerDateContent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.registerDateDay {
+    width: 20%;
+}
+
+.registerDateMonth {
+    width: 45%;
+}
+
+.registerDateYear {
+    width: 30%;
+
+}
+
+.registerDateError {
+    color: red;
+    font-size: 13px;
+    font-weight: 300;
+    margin-left: 10px;
+}

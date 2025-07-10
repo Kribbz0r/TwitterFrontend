@@ -1,0 +1,11 @@
+.registerEmailInput {
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.registerEmailError {
+    color: red;
+    font-size: 12px;
+    font-weight: 300;
+    margin-left: 10px;
+}
