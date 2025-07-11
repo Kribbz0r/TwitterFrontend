@@ -44,11 +44,25 @@ export const RegisterNameInputs: React.FC<RegisterNameInputProps> = ({ firstName
     return (
         <div className='registerNameInput'>
             <div className='registerNameContent'>
-                <ValidatedTextInput valid={fisrtNameValid} name={'firstName'} label={'First name'} changeValue={updateName} data={firstName} />
+                <ValidatedTextInput valid={fisrtNameValid}
+                    name={'firstName'}
+                    label={'First name'}
+                    changeValue={updateName}
+                    attributes={{
+                        maxLength: 50
+                    }}
+                    data={firstName} />
                 {fisrtNameValid ? <></> : <span className='registerNameError'>What is your name?</span>}
             </div>
             <div className='registerNameContent'>
-                <ValidatedTextInput valid={lastNameValid} name={'lastName'} label={'Last name'} changeValue={updateName} data={lastName} />
+                <ValidatedTextInput valid={lastNameValid}
+                    name={'lastName'}
+                    label={'Last name'}
+                    changeValue={updateName}
+                    attributes={{
+                        maxLength: 50
+                    }}
+                    data={lastName} />
                 {lastNameValid ? <></> : <span className='registerNameError'>What is your name?</span>}
 
             </div>

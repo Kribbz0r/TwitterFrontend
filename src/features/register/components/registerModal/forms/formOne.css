@@ -15,3 +15,21 @@
     justify-content: center;
     align-items: center;
 }
+
+.registerStepOneHeader {
+    width: 100%;
+    font-size: 31px;
+    font-weight: 500;
+}
+
+.registerStepOneAgeInformation {
+    height: fit-content;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.registerStepOneDateOfBirthText {
+    font-size: 13px;
+    color: #536471;
+    font-weight: 400;
+}

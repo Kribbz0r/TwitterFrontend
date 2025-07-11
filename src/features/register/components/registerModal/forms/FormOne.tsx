@@ -8,13 +8,6 @@ import { RegisterNameInputs } from '../registerNameInput/RegisterNameInputs';
 import { RegisterEmailInput } from '../registerEmailInput/RegisterEmailInput';
 import { StyledNextBtn } from '../../registrationNextBtn/RegisterNextBtn';
 
-interface FormOneState {
-    firstName: string;
-    lastName: string;
-    email: string;
-    dateOfBirth: string;
-}
-
 
 export const FormOne: React.FC = () => {
 
@@ -40,8 +33,12 @@ export const FormOne: React.FC = () => {
     return (
         <div className='registerStepOneContainer'>
             <div className='registerStepOneContent'>
+                <h1 className='registerStepOneHeader'>Create account</h1>
                 <RegisterNameInputs firstName={registerState.firstName} lastName={registerState.lastName} />
                 <RegisterEmailInput email={registerState.email} />
+                <div className='registerStepOneAgeInformation'>
+                    <span className='registerStepOneDateOfBirthText'>Date of birth will not be shown publicly.</span>
+                </div>
                 <RegisterDateInput date={registerState.dateOfBirth} />
             </div>
             <StyledNextBtn disabled={!btnActive} color={"black"} active={btnActive} onClick={nextPage}>

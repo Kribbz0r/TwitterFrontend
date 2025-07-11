@@ -27,3 +27,11 @@
     -moz-appearance: none;
     width: 100%;
 }
+
+.validatedInputRemainingLenght {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-weight: 500;
+    color: #657786;
+}
