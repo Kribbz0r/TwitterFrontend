@@ -29,8 +29,9 @@ export const FormTwo: React.FC = () => {
                         We use this data to personalize your experience. This web browsing history will never be stored with your name, email or phone number.
                     </p>
                 </div>
+                <input className="registerStepTwoCheck" type="checkbox" />
                 <p className="registerStepTwoPolicy"> {/* Make it a something global later */}
-                    By signing up, you agree to our <span className="registerStepTwoLink">Terms</span>, and <span className="registerStepTwoLink">Cookies.</span> <span className="registerStepTwoLink">Learn more.</span>
+                    By signing up, you agree to our <span className="registerStepTwoLink">Terms</span>, and <span className="registerStepTwoLink">Cookies</span>. <span className="registerStepTwoLink">Learn more.</span>
                 </p>
             </div>
             <StyledNextBtn active={true} color={"black"} onClick={nextStep}>
@@ -40,6 +41,5 @@ export const FormTwo: React.FC = () => {
 
         </div>
     )
-
 
 }
