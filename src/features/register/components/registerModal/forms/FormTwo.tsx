@@ -4,7 +4,7 @@ import { increaseStep } from "../../../../../redux/slices/RegisterSlice";
 import { AppDispatch } from "../../../../../redux/Store";
 import { StyledNextBtn } from "../../registrationNextBtn/RegisterNextBtn";
 
-import { Checkbox } from "../../checkbox/Checkbox";
+import { CheckBox } from "../../../../../components/checkbox/Checkbox";
 import "./formTwo.css";
 
 
@@ -30,7 +30,7 @@ export const FormTwo: React.FC = () => {
                         We use this data to personalize your experience. This web browsing history will never be stored with your name, email or phone number.
                     </p>
                 </div>
-                <Checkbox />
+                <CheckBox />
                 <p className="registerStepTwoPolicy"> {/* Make it a something global later */}
                     By signing up, you agree to our <span className="registerStepTwoLink">Terms</span>, and <span className="registerStepTwoLink">Cookies</span>. <span className="registerStepTwoLink">Learn more.</span>
                 </p>
