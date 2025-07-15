@@ -40,3 +40,8 @@ export interface StyledNextBtnProps {
     theme: Theme;
     color: string;
 }
+
+export interface StyledCheckboxProps {
+    active: boolean;
+    theme: Theme;
+}
