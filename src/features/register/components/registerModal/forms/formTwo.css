@@ -32,29 +32,3 @@
     justify-content: space-between;
     align-items: flex-start;
 }
-
-.registerStepTwoPrivacy {
-    margin: 0;
-    width: 90%;
-    font-size: 15px;
-    font-weight: 400;
-    margin-bottom: 20px;
-}
-
-.registerStepTwoPolicy {
-    font-size: 15px;
-    font-weight: 400;
-    color: #536471;
-    margin-bottom: 40px;
-}
-
-.registerStepTwoLink {
-    font-size: 15px;
-    font-weight: 400;
-    color: #1DA1F2;
-    cursor: pointer;
-}
-
-.registerStepTwoLink:hover {
-    text-decoration: underline;
-}

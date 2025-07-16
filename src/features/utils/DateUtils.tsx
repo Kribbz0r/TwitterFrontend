@@ -1,3 +1,5 @@
+import { DateOfBirth } from "./GlogalInterfaces";
+
 const MONTHS: string[] = [
     '',
     'January',
@@ -50,4 +52,8 @@ export const getYears = (): React.ReactElement[] => {
         }
     }
     return options;
+}
+
+export const stringifyDate = (date: DateOfBirth): string => {
+    return `${date.day} ${MONTHS[date.month].substring(0, 3)}, ${date.year}`
 }

@@ -6,6 +6,7 @@ import { StyledNextBtn } from "../../registrationNextBtn/RegisterNextBtn";
 
 import { CheckBox } from "../../../../../components/checkbox/Checkbox";
 import "./formTwo.css";
+import "./forms.css"
 
 
 export const FormTwo: React.FC = () => {
@@ -26,13 +27,13 @@ export const FormTwo: React.FC = () => {
                     Track where you see Twitter content across the web.
                 </h3>
                 <div className="registerStepTwoToggleGroup">
-                    <p className="registerStepTwoPrivacy">
+                    <p className="registerPrivacy">
                         We use this data to personalize your experience. This web browsing history will never be stored with your name, email or phone number.
                     </p>
                 </div>
                 <CheckBox />
-                <p className="registerStepTwoPolicy"> {/* Make it a something global later */}
-                    By signing up, you agree to our <span className="registerStepTwoLink">Terms</span>, and <span className="registerStepTwoLink">Cookies</span>. <span className="registerStepTwoLink">Learn more.</span>
+                <p className="registerPolicy">
+                    By signing up, you agree to our <span className="registerLink">Terms</span>, and <span className="registerLink">Cookies</span>. <span className="registerLink">Learn more.</span>
                 </p>
             </div>
             <StyledNextBtn active={true} color={"black"} onClick={nextStep}>

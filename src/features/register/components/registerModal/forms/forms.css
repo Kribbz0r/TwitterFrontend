@@ -1,0 +1,25 @@
+.registerPrivacy {
+    margin: 0;
+    width: 90%;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.registerPolicy {
+    font-size: 15px;
+    font-weight: 400;
+    color: #536471;
+    margin-bottom: 30px;
+}
+
+.registerLink {
+    font-size: 15px;
+    font-weight: 400;
+    color: #1DA1F2;
+    cursor: pointer;
+}
+
+.registerLink:hover {
+    text-decoration: underline;
+}
