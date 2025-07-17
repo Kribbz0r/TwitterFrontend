@@ -1,5 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { DateOfBirth } from "../../features/utils/GlogalInterfaces";
+import axios from "axios";
+
+interface RegisterUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateOfBirth: string;
+}
+
 
 interface RegisterSliceState {
     loading: boolean;
@@ -38,6 +47,18 @@ const initialState: RegisterSliceState = {
     dateOfBirthValid: false,
     step: 1
 }
+
+export const registerUser = createAsyncThunk(
+    "register/register",
+    async (user: RegisterUser, thunkAPI) => {
+        try {
+            const req = await axios.post("http:localhost:8888/authenticate/register", user);
+            return await req.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+)
 
 export const RegisterSlice = createSlice({
     name: "register",
@@ -80,6 +101,23 @@ export const RegisterSlice = createSlice({
         }
 
 
+    },
+    extraReducers: (builder) => {
+        builder.addCase(registerUser.pending, (state, action) => {
+            state.loading = true;
+            return state;
+        });
+        builder.addCase(registerUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.error = false;
+            state.step++;
+            return state;
+        });
+        builder.addCase(registerUser.rejected, (state, action) => {
+            state.error = true;
+            state.loading = false;
+            return state;
+        })
     }
 });
 
