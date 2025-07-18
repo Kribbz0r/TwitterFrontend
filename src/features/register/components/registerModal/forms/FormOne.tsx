@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, UseSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../../redux/Store';
-import { increaseStep } from '../../../../../redux/slices/RegisterSlice';
+import { increaseStep, updateRegister } from '../../../../../redux/slices/RegisterSlice';
 import './formOne.css'
 import { RegisterDateInput } from '../registerDateInput/RegisterDateInput';
 import { RegisterNameInputs } from '../registerNameInput/RegisterNameInputs';
@@ -17,6 +17,10 @@ export const FormOne: React.FC = () => {
     const [btnActive, setBtnActive] = useState<boolean>(false)
 
     const nextPage = () => {
+        dispatch(updateRegister({
+            name: "error",
+            value: false
+        }));
         dispatch(increaseStep());
     }
 
