@@ -2,6 +2,8 @@ import React from "react";
 import { CheckBox } from "../../../../../components/checkbox/Checkbox";
 
 import "./forms.css"
+import { DropDown } from "../../../../../components/dropDown/DropDown";
+import { ValidatedTextInput } from "../../../../../components/validatedInput/ValidatedTextInput";
 
 
 export const FormFour: React.FC = () => {
@@ -14,6 +16,20 @@ export const FormFour: React.FC = () => {
                     <p>Let people who have your telephone number find and connect with you
                         <span className="registerLink"> Learn more</span>
                     </p>
+                    <div className="registerStepFourInputs">
+                        <DropDown
+                            content={() => { return [] }}
+                            change={() => console.log("123 123 123")}
+                            label={"Contry code here"}
+                            defaultValue={"Sweden +46"}
+                        />
+                        <ValidatedTextInput
+                            valid={true}
+                            name={"telephoneNumber"}
+                            label={"Yo numba"}
+                            changeValue={() => console.log("Da numba")}
+                        />
+                    </div>
                     <CheckBox />
                 </div>
                 <div className="registerStepFourGroup">
