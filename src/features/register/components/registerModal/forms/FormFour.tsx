@@ -31,6 +31,9 @@ export const FormFour: React.FC = () => {
         console.log("Country code:", countryCode);
         console.log("Telephone number:", telephoneNumber);
         console.log("Country:", country);
+        console.log("Number length: ", telephoneNumber.length);
+
+
         if (telephoneNumber) {
             setValidNumber(validateSwedishTelephoneNumber(telephoneNumber));
         }
