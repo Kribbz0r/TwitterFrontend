@@ -63,3 +63,11 @@ export const validateEmail = (value: string): boolean => {
         return false;
     } else return true;
 }
+
+
+// This should be a much bigger method that includes ever country specific number length
+export const validateSwedishTelephoneNumber = (telephoneNumber: string): boolean => {
+    let strippedTelephoneNumber = telephoneNumber.replace(/[^0-9]/ig, "");
+
+    return strippedTelephoneNumber.length === 9;
+}

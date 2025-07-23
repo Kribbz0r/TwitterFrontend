@@ -23,3 +23,5 @@
 .registerLink:hover {
     text-decoration: underline;
 }
+
+.registerInvalid {}

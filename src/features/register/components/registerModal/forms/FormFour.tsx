@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { CheckBox } from "../../../../../components/checkbox/Checkbox";
 import { countryCodeDropDown } from "../../../../utils/CountryCodeDropDownUtils";
+import { StyledNextBtn } from "../../registrationNextBtn/RegisterNextBtn";
 
 import "./forms.css"
 import { DropDown } from "../../../../../components/dropDown/DropDown";
 import { ValidatedTextInput } from "../../../../../components/validatedInput/ValidatedTextInput";
+import { validateSwedishTelephoneNumber } from "../../../../../services/Validators";
+
 
 
 export const FormFour: React.FC = () => {
 
     const [countryCode, setCountryCode] = useState<string>("+46");
     const [telephoneNumber, setTelephoneNumber] = useState<string>("");
-    const [country, setCountry] = useState<string>("Sweden")
+    const [country, setCountry] = useState<string>("Sweden");
+    const [validNumber, setValidNumber] = useState<boolean>(true);
 
     const changeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCountryCode(e.target.value.split(" ")[0]);
-        setCountry(e.target.value.split(" ").slice(1).join())
+        setCountry(e.target.value.split(" ")[1])
     }
 
     const changeTelephoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +31,11 @@ export const FormFour: React.FC = () => {
         console.log("Country code:", countryCode);
         console.log("Telephone number:", telephoneNumber);
         console.log("Country:", country);
+        if (telephoneNumber) {
+            setValidNumber(validateSwedishTelephoneNumber(telephoneNumber));
+        }
+
+
 
     }, [countryCode, telephoneNumber, country])
 
@@ -52,6 +61,7 @@ export const FormFour: React.FC = () => {
                             label={"Yo numba"}
                             changeValue={changeTelephoneNumber}
                         />
+                        {validNumber ? <></> : <p className="registerInvalid">+46 is translated into the first 0 of your telephone number. Please enter the rest of your telephone number</p>}
                     </div>
                     <CheckBox />
                 </div>
@@ -62,6 +72,13 @@ export const FormFour: React.FC = () => {
                     </p>
                     <CheckBox />
                 </div>
+                <StyledNextBtn
+                    disabled={(telephoneNumber && validNumber) ? false : true}
+                    color={'black'}
+                    active={(telephoneNumber && validNumber) ? true : false}
+                    onClick={() => console.log("updating the telephonenumber to the DB")}>
+                    Update telephone number
+                </StyledNextBtn>
             </div>
         </div>
     )

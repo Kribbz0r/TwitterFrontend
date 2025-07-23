@@ -13,12 +13,14 @@ interface DropDownProps {
 export const DropDown: React.FC<DropDownProps> = ({ content, change, label, defaultValue }) => {
 
     const [active, setActive] = useState<boolean>(false);
+    const [data, setData] = useState<string>("");
 
     const toggleActive = () => {
         setActive(!active);
     }
 
     const changeValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setData(e.target.value)
         change(e);
     }
 
@@ -36,7 +38,7 @@ export const DropDown: React.FC<DropDownProps> = ({ content, change, label, defa
                         top: '35%'
                     }} />
                 </StyledInputLabel>
-                <select onChange={changeValue} onFocus={toggleActive} onBlur={toggleActive} value={defaultValue} >
+                <select onChange={changeValue} onFocus={toggleActive} onBlur={toggleActive} value={data ? data : defaultValue} >
                     {content()}
                 </select>
             </StyledInputBox>
