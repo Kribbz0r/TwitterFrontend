@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { DateOfBirth } from "../../features/utils/GlogalInterfaces";
 import axios from "axios";
+import { rejects } from "assert";
 
 interface RegisterUser {
     firstName: string;
@@ -22,6 +23,11 @@ interface RegisterSliceState {
     dateOfBirth: DateOfBirth;
     dateOfBirthValid: boolean;
     step: number;
+}
+
+interface UpdateTelephone{
+    username:string;
+    telephoneNumber:string;
 }
 
 
@@ -52,13 +58,28 @@ export const registerUser = createAsyncThunk(
     "register/register",
     async (user: RegisterUser, thunkAPI) => {
         try {
-            const req = await axios.post("http://localhost:8888/authenticate/register", user);
-            return await req.data;
+            const request = await axios.post("http://localhost:8888/authenticate/register", user);
+            return await request.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }
     }
 )
+
+export const updateUserTelephoneNumber = createAsyncThunk(
+"register/telephone",
+async (body:UpdateTelephone, thunkAPI)=>{
+
+    try {
+        const request = await axios.post ("http://localhost:8888/update/telephone")
+    } catch (e) {
+        return thunkAPI.rejectWithValue(e);
+    }
+
+}
+
+)
+
 
 export const RegisterSlice = createSlice({
     name: "register",
@@ -107,16 +128,35 @@ export const RegisterSlice = createSlice({
             state.loading = true;
             return state;
         });
+        builder.addCase(updateUserTelephoneNumber.pending, (state,action)=>
+        state={
+            ...state,
+            loading:true,
+        });
         builder.addCase(registerUser.fulfilled, (state, action) => {
             state.loading = false;
             state.error = false;
             state.step++;
             return state;
         });
+        builder.addCase(updateUserTelephoneNumber.fulfilled, (state,action)=>{
+            
+            state.loading=false;
+            state.error=false;
+            state.step++;
+            return state;
+
+        })
         builder.addCase(registerUser.rejected, (state, action) => {
             state.error = true;
             state.loading = false;
             return state;
+        })
+        builder.addCase(updateUserTelephoneNumber.rejected, (state,action)=>{
+            state= {...state,
+                loading:false,
+            error:true} 
+        return state;
         })
     }
 });
