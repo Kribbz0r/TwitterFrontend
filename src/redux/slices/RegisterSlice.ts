@@ -23,6 +23,7 @@ interface RegisterSliceState {
     dateOfBirth: DateOfBirth;
     dateOfBirthValid: boolean;
     step: number;
+    username:string;
 }
 
 interface UpdateTelephone{
@@ -51,7 +52,8 @@ const initialState: RegisterSliceState = {
         year: 0
     },
     dateOfBirthValid: false,
-    step: 1
+    step: 1,
+    username:"",
 }
 
 export const registerUser = createAsyncThunk(
@@ -71,7 +73,7 @@ export const updateUserTelephoneNumber = createAsyncThunk(
 async (body:UpdateTelephone, thunkAPI)=>{
 
     try {
-        const request = await axios.post ("http://localhost:8888/update/telephone")
+        const request = await axios.put("http://localhost:8888/update/telephone")
     } catch (e) {
         return thunkAPI.rejectWithValue(e);
     }
@@ -128,11 +130,13 @@ export const RegisterSlice = createSlice({
             state.loading = true;
             return state;
         });
-        builder.addCase(updateUserTelephoneNumber.pending, (state,action)=>
+        builder.addCase(updateUserTelephoneNumber.pending, (state,action)=>{
         state={
             ...state,
-            loading:true,
-        });
+            loading:true
+        }
+    return state;
+    });
         builder.addCase(registerUser.fulfilled, (state, action) => {
             state.loading = false;
             state.error = false;
@@ -140,22 +144,25 @@ export const RegisterSlice = createSlice({
             return state;
         });
         builder.addCase(updateUserTelephoneNumber.fulfilled, (state,action)=>{
-            
-            state.loading=false;
-            state.error=false;
-            state.step++;
+            state={
+                ...state,
+                loading:false,
+                error:false,
+                step:state.step++
+            }
             return state;
-
-        })
+        });
         builder.addCase(registerUser.rejected, (state, action) => {
             state.error = true;
             state.loading = false;
             return state;
         })
         builder.addCase(updateUserTelephoneNumber.rejected, (state,action)=>{
-            state= {...state,
+            state= {
+                ...state,
                 loading:false,
-            error:true} 
+                error:true
+            } 
         return state;
         })
     }

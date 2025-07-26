@@ -7,7 +7,9 @@ import "./forms.css"
 import { DropDown } from "../../../../../components/dropDown/DropDown";
 import { ValidatedTextInput } from "../../../../../components/validatedInput/ValidatedTextInput";
 import { validateSwedishTelephoneNumber } from "../../../../../services/Validators";
-
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../../../redux/Store";
+import { updateUserTelephoneNumber } from "../../../../../redux/slices/RegisterSlice";
 
 
 export const FormFour: React.FC = () => {
@@ -16,6 +18,9 @@ export const FormFour: React.FC = () => {
     const [telephoneNumber, setTelephoneNumber] = useState<string>("");
     const [country, setCountry] = useState<string>("Sweden");
     const [validNumber, setValidNumber] = useState<boolean>(true);
+    const state = useSelector((state:RootState)=>state.register)
+
+    const dispatch:AppDispatch=useDispatch();
 
     const changeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCountryCode(e.target.value.split(" ")[0]);
@@ -24,6 +29,13 @@ export const FormFour: React.FC = () => {
 
     const changeTelephoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTelephoneNumber(e.target.value);
+    }
+
+    const sendTelephoneNumber=()=> {
+        dispatch(updateUserTelephoneNumber({
+            username:state.username,
+            telephoneNumber:telephoneNumber
+        }))
     }
 
 
