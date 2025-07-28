@@ -138,17 +138,23 @@ export const RegisterSlice = createSlice({
     return state;
     });
         builder.addCase(registerUser.fulfilled, (state, action) => {
-            state.loading = false;
-            state.error = false;
-            state.step++;
+            let nextStep=state.step +1
+            state ={
+                ...state,
+                username:action.payload.username,
+                loading:false,
+                error:false,
+                step:nextStep
+            }
             return state;
         });
         builder.addCase(updateUserTelephoneNumber.fulfilled, (state,action)=>{
+            let nextStep=state.step +1
             state={
                 ...state,
                 loading:false,
                 error:false,
-                step:state.step++
+                step: nextStep
             }
             return state;
         });

@@ -91,7 +91,7 @@ export const FormFour: React.FC = () => {
                     disabled={(telephoneNumber && validNumber) ? false : true}
                     color={'black'}
                     active={(telephoneNumber && validNumber) ? true : false}
-                    onClick={() => console.log("updating the telephonenumber to the DB")}>
+                    onClick={sendTelephoneNumber}>
                     Update telephone number
                 </StyledNextBtn>
             </div>
