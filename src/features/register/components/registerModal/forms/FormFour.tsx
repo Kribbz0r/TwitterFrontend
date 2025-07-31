@@ -6,53 +6,53 @@ import { StyledNextBtn } from "../../registrationNextBtn/RegisterNextBtn";
 import "./forms.css"
 import { DropDown } from "../../../../../components/dropDown/DropDown";
 import { ValidatedTextInput } from "../../../../../components/validatedInput/ValidatedTextInput";
-import { validateSwedishTelephoneNumber } from "../../../../../services/Validators";
+import { validateSwedishPhoneNumber } from "../../../../../services/Validators";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../../redux/Store";
-import { updateUserTelephoneNumber } from "../../../../../redux/slices/RegisterSlice";
+import { updateUserPhoneNumber } from "../../../../../redux/slices/RegisterSlice";
 
 
 export const FormFour: React.FC = () => {
 
     const [countryCode, setCountryCode] = useState<string>("+46");
-    const [telephoneNumber, setTelephoneNumber] = useState<string>("");
+    const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [country, setCountry] = useState<string>("Sweden");
     const [validNumber, setValidNumber] = useState<boolean>(true);
-    const state = useSelector((state:RootState)=>state.register)
+    const state = useSelector((state: RootState) => state.register)
 
-    const dispatch:AppDispatch=useDispatch();
+    const dispatch: AppDispatch = useDispatch();
 
     const changeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCountryCode(e.target.value.split(" ")[0]);
         setCountry(e.target.value.split(" ")[1])
     }
 
-    const changeTelephoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTelephoneNumber(e.target.value);
+    const changePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPhoneNumber(e.target.value);
     }
 
-    const sendTelephoneNumber=()=> {
-        dispatch(updateUserTelephoneNumber({
-            username:state.username,
-            telephoneNumber:telephoneNumber
+    const sendPhoneNumber = () => {
+        dispatch(updateUserPhoneNumber({
+            username: state.username,
+            phoneNumber: phoneNumber
         }))
     }
 
 
     useEffect(() => {
         console.log("Country code:", countryCode);
-        console.log("Telephone number:", telephoneNumber);
+        console.log("Phone number:", phoneNumber);
         console.log("Country:", country);
-        console.log("Number length: ", telephoneNumber.length);
+        console.log("Number length: ", phoneNumber.length);
 
 
-        if (telephoneNumber) {
-            setValidNumber(validateSwedishTelephoneNumber(telephoneNumber));
+        if (phoneNumber) {
+            setValidNumber(validateSwedishPhoneNumber(phoneNumber));
         }
 
 
 
-    }, [countryCode, telephoneNumber, country])
+    }, [countryCode, phoneNumber, country])
 
     return (
         <div className="registerStepFourContainer">
@@ -72,9 +72,9 @@ export const FormFour: React.FC = () => {
                         />
                         <ValidatedTextInput
                             valid={true}
-                            name={"telephoneNumber"}
+                            name={"phoneNumber"}
                             label={"Yo numba"}
-                            changeValue={changeTelephoneNumber}
+                            changeValue={changePhoneNumber}
                         />
                         {validNumber ? <></> : <p className="registerInvalid">+46 is translated into the first 0 of your telephone number. Please enter the rest of your telephone number</p>}
                     </div>
@@ -88,10 +88,10 @@ export const FormFour: React.FC = () => {
                     <CheckBox />
                 </div>
                 <StyledNextBtn
-                    disabled={(telephoneNumber && validNumber) ? false : true}
+                    disabled={(phoneNumber && validNumber) ? false : true}
                     color={'black'}
-                    active={(telephoneNumber && validNumber) ? true : false}
-                    onClick={sendTelephoneNumber}>
+                    active={(phoneNumber && validNumber) ? true : false}
+                    onClick={sendPhoneNumber}>
                     Update telephone number
                 </StyledNextBtn>
             </div>

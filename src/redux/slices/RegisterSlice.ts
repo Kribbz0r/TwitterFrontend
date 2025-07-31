@@ -23,12 +23,12 @@ interface RegisterSliceState {
     dateOfBirth: DateOfBirth;
     dateOfBirthValid: boolean;
     step: number;
-    username:string;
+    username: string;
 }
 
-interface UpdateTelephone{
-    username:string;
-    telephoneNumber:string;
+interface UpdatePhone {
+    username: string;
+    phoneNumber: string;
 }
 
 
@@ -53,7 +53,7 @@ const initialState: RegisterSliceState = {
     },
     dateOfBirthValid: false,
     step: 1,
-    username:"",
+    username: "",
 }
 
 export const registerUser = createAsyncThunk(
@@ -68,17 +68,18 @@ export const registerUser = createAsyncThunk(
     }
 )
 
-export const updateUserTelephoneNumber = createAsyncThunk(
-"register/telephone",
-async (body:UpdateTelephone, thunkAPI)=>{
+export const updateUserPhoneNumber = createAsyncThunk(
+    "register/phone",
+    async (body: UpdatePhone, thunkAPI) => {
 
-    try {
-        const request = await axios.put("http://localhost:8888/update/telephone")
-    } catch (e) {
-        return thunkAPI.rejectWithValue(e);
+        try {
+            const request = await axios.put("http://localhost:8888/authenticate/update/phoneNumber", body)
+            return await request.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+
     }
-
-}
 
 )
 
@@ -130,30 +131,30 @@ export const RegisterSlice = createSlice({
             state.loading = true;
             return state;
         });
-        builder.addCase(updateUserTelephoneNumber.pending, (state,action)=>{
-        state={
-            ...state,
-            loading:true
-        }
-    return state;
-    });
-        builder.addCase(registerUser.fulfilled, (state, action) => {
-            let nextStep=state.step +1
-            state ={
+        builder.addCase(updateUserPhoneNumber.pending, (state, action) => {
+            state = {
                 ...state,
-                username:action.payload.username,
-                loading:false,
-                error:false,
-                step:nextStep
+                loading: true
             }
             return state;
         });
-        builder.addCase(updateUserTelephoneNumber.fulfilled, (state,action)=>{
-            let nextStep=state.step +1
-            state={
+        builder.addCase(registerUser.fulfilled, (state, action) => {
+            let nextStep = state.step + 1
+            state = {
                 ...state,
-                loading:false,
-                error:false,
+                username: action.payload.username,
+                loading: false,
+                error: false,
+                step: nextStep
+            }
+            return state;
+        });
+        builder.addCase(updateUserPhoneNumber.fulfilled, (state, action) => {
+            let nextStep = state.step + 1
+            state = {
+                ...state,
+                loading: false,
+                error: false,
                 step: nextStep
             }
             return state;
@@ -163,13 +164,13 @@ export const RegisterSlice = createSlice({
             state.loading = false;
             return state;
         })
-        builder.addCase(updateUserTelephoneNumber.rejected, (state,action)=>{
-            state= {
+        builder.addCase(updateUserPhoneNumber.rejected, (state, action) => {
+            state = {
                 ...state,
-                loading:false,
-                error:true
-            } 
-        return state;
+                loading: false,
+                error: true
+            }
+            return state;
         })
     }
 });
