@@ -1,0 +1,53 @@
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 31px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+p {
+    font-size: 15px;
+    font-weight: 400;
+    color: #536471;
+    margin: 0;
+}
+
+.registerStepFourSubheader {
+    margin-bottom: 40px;
+}
+
+.registerStepFourContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.registerStepFourContent {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.registerStepFourInput {
+    margin-bottom: 15px;
+}
+
+.registerStepFourCheckGroup {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.registerStepFourCheckGroup>p {
+    margin-right: 25px;
+}

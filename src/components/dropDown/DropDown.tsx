@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import { StyledInputBox, StyledInputLabel } from "../validatedInput/StyledInput";
+import "../validatedInput/ValidatedInput"
 
 interface DropDownProps {
 
@@ -38,7 +39,7 @@ export const DropDown: React.FC<DropDownProps> = ({ content, change, label, defa
                         top: '35%'
                     }} />
                 </StyledInputLabel>
-                <select onChange={changeValue} onFocus={toggleActive} onBlur={toggleActive} value={data ? data : defaultValue} >
+                <select className="validatedInputValue validatedDateSelector" onChange={changeValue} onFocus={toggleActive} onBlur={toggleActive} value={data ? data : defaultValue} >
                     {content()}
                 </select>
             </StyledInputBox>

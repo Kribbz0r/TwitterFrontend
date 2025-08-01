@@ -3,6 +3,7 @@ import { CheckBox } from "../../../../../components/checkbox/Checkbox";
 import { countryCodeDropDown } from "../../../../utils/CountryCodeDropDownUtils";
 import { StyledNextBtn } from "../../registrationNextBtn/RegisterNextBtn";
 
+import "./formFour.css"
 import "./forms.css"
 import { DropDown } from "../../../../../components/dropDown/DropDown";
 import { ValidatedTextInput } from "../../../../../components/validatedInput/ValidatedTextInput";
@@ -58,29 +59,29 @@ export const FormFour: React.FC = () => {
         <div className="registerStepFourContainer">
             <div className="registerStepFourContent">
                 <h1>Add a telephone number</h1>
-                <p>Enter the telephone number associated with this account.</p>
-                <div className="registerStepFourGroup">
+                <p className="registerStepFourSubheader">Enter the telephone number associated with this account.</p>
+                <div className="registerStepFourInputs">
+                    <DropDown
+                        content={countryCodeDropDown}
+                        change={changeCountry}
+                        label={"Contry code here"}
+                        defaultValue={country}
+                    />
+                    <ValidatedTextInput
+                        valid={true}
+                        name={"phoneNumber"}
+                        label={"Yo numba"}
+                        changeValue={changePhoneNumber}
+                    />
+                    {validNumber ? <></> : <p className="registerInvalid">+46 is translated into the first 0 of your telephone number. Please enter the rest of your telephone number</p>}
+                </div>
+                <div className="registerStepFourCheckGroup">
                     <p>Let people who have your telephone number find and connect with you
                         <span className="registerLink"> Learn more</span>
                     </p>
-                    <div className="registerStepFourInputs">
-                        <DropDown
-                            content={countryCodeDropDown}
-                            change={changeCountry}
-                            label={"Contry code here"}
-                            defaultValue={country}
-                        />
-                        <ValidatedTextInput
-                            valid={true}
-                            name={"phoneNumber"}
-                            label={"Yo numba"}
-                            changeValue={changePhoneNumber}
-                        />
-                        {validNumber ? <></> : <p className="registerInvalid">+46 is translated into the first 0 of your telephone number. Please enter the rest of your telephone number</p>}
-                    </div>
                     <CheckBox />
                 </div>
-                <div className="registerStepFourGroup">
+                <div className="registerStepFourCheckGroup">
                     <p>Let us use your telephone number, so that we can send persoalize adds.
                         If you dont enable this we will use your telephone number to gather data about you.
                         <span className="registerLink"> Privacy Policy</span>.

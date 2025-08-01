@@ -30,8 +30,8 @@ export const FormTwo: React.FC = () => {
                     <p className="registerPrivacy">
                         We use this data to personalize your experience. This web browsing history will never be stored with your name, email or phone number.
                     </p>
+                    <CheckBox />
                 </div>
-                <CheckBox />
                 <p className="registerPolicy">
                     By signing up, you agree to our <span className="registerLink">Terms</span>, and <span className="registerLink">Cookies</span>. <span className="registerLink">Learn more.</span>
                 </p>
