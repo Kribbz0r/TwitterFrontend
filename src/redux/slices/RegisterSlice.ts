@@ -58,9 +58,9 @@ const initialState: RegisterSliceState = {
 
 export const registerUser = createAsyncThunk(
     "register/register",
-    async (user: RegisterUser, thunkAPI) => {
+    async (body: RegisterUser, thunkAPI) => {
         try {
-            const request = await axios.post("http://localhost:8888/authenticate/register", user);
+            const request = await axios.post("http://localhost:8888/authenticate/register", body);
             return await request.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
@@ -73,8 +73,8 @@ export const updateUserPhoneNumber = createAsyncThunk(
     async (body: UpdatePhone, thunkAPI) => {
 
         try {
-            const request = await axios.put("http://localhost:8888/authenticate/update/phoneNumber", body)
-            return await request.data;
+            await axios.put("http://localhost:8888/authenticate/update/phoneNumber", body);
+            await axios.post("http://localhost:8888/authenticate/email/verification/code", body);
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }

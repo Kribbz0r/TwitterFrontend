@@ -2,6 +2,7 @@ import { FormFour } from "../register/components/registerModal/forms/FormFour";
 import { FormOne } from "../register/components/registerModal/forms/FormOne";
 import { FormThree } from "../register/components/registerModal/forms/FormThree";
 import { FormTwo } from "../register/components/registerModal/forms/FormTwo";
+import { FormFive } from "../register/components/registerModal/forms/FormFive";
 
 export const determineModalContent = (step: number): React.ReactElement => {
 
@@ -15,7 +16,7 @@ export const determineModalContent = (step: number): React.ReactElement => {
         case 4:
             return <FormFour />
         case 5:
-            return <span>Reg step 5</span>
+            return <FormFive />
         case 6:
             return <span>Reg step 6</span>
         default: return <></>
