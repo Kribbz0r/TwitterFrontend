@@ -10,6 +10,9 @@ export const FormFive: React.FC = () => {
     const state = useSelector((state: RootState) => state.register);
 
     const [code, setCode] = useState<string>("");
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCode(e.target.value);
+    }
 
 
     return (
@@ -20,7 +23,7 @@ export const FormFive: React.FC = () => {
                 <ValidatedTextInput valid={true}
                     name={code}
                     label={"verification code"}
-                    changeValue={() => { }} />
+                    changeValue={handleChange} />
                 <p className="registerStepFiveMessage">Didn't receive an email?</p>
                 <StyledNextBtn active={code ? true : false} disabled={code ? false : true} color={"black"}
                     onClick={() => { }}>Next</StyledNextBtn>
