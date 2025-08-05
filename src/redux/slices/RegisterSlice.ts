@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { DateOfBirth } from "../../features/utils/GlogalInterfaces";
 import axios from "axios";
-import { rejects } from "assert";
 
 interface RegisterUser {
     firstName: string;
@@ -68,13 +67,22 @@ export const registerUser = createAsyncThunk(
     }
 )
 
+export const sendVerificationEmail = createAsyncThunk(
+    "register/sendVerificationEmail",
+    async (body: string, thunkAPI) => {
+        try {
+            await axios.post("http://localhost:8888/authenticate/email/verification/code", { username: body });
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+)
+
 export const updateUserPhoneNumber = createAsyncThunk(
     "register/phone",
     async (body: UpdatePhone, thunkAPI) => {
-
         try {
             await axios.put("http://localhost:8888/authenticate/update/phoneNumber", body);
-            await axios.post("http://localhost:8888/authenticate/email/verification/code", body);
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }
@@ -131,6 +139,7 @@ export const RegisterSlice = createSlice({
             state.loading = true;
             return state;
         });
+
         builder.addCase(updateUserPhoneNumber.pending, (state, action) => {
             state = {
                 ...state,
@@ -138,6 +147,15 @@ export const RegisterSlice = createSlice({
             }
             return state;
         });
+
+        builder.addCase(sendVerificationEmail.pending, (state, action) => {
+            state = {
+                ...state,
+                loading: true
+            }
+            return state;
+        });
+
         builder.addCase(registerUser.fulfilled, (state, action) => {
             let nextStep = state.step + 1
             state = {
@@ -149,6 +167,7 @@ export const RegisterSlice = createSlice({
             }
             return state;
         });
+
         builder.addCase(updateUserPhoneNumber.fulfilled, (state, action) => {
             let nextStep = state.step + 1
             state = {
@@ -159,11 +178,24 @@ export const RegisterSlice = createSlice({
             }
             return state;
         });
+
+        builder.addCase(sendVerificationEmail.fulfilled, (state, action) => {
+
+            state = {
+                ...state,
+                loading: false,
+                error: false,
+
+            }
+            return state;
+        });
+
         builder.addCase(registerUser.rejected, (state, action) => {
             state.error = true;
             state.loading = false;
             return state;
-        })
+        });
+
         builder.addCase(updateUserPhoneNumber.rejected, (state, action) => {
             state = {
                 ...state,
@@ -171,7 +203,16 @@ export const RegisterSlice = createSlice({
                 error: true
             }
             return state;
+        });
+        builder.addCase(sendVerificationEmail.rejected, (state, action) => {
+            state = {
+                ...state,
+                loading: false,
+                error: true
+            }
+            return state;
         })
+
     }
 });
 
