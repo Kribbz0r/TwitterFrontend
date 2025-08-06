@@ -21,6 +21,7 @@ interface RegisterSliceState {
     emailValid: boolean;
     dateOfBirth: DateOfBirth;
     dateOfBirthValid: boolean;
+    phoneNumber: string;
     step: number;
     username: string;
 }
@@ -34,6 +35,11 @@ interface UpdatePhone {
 interface UpdatePayload {
     name: string;
     value: string | number | boolean;
+}
+
+interface VerifyCode {
+    username: string;
+    verificationCode: string;
 }
 
 const initialState: RegisterSliceState = {
@@ -51,9 +57,21 @@ const initialState: RegisterSliceState = {
         year: 0
     },
     dateOfBirthValid: false,
+    phoneNumber: "",
     step: 1,
     username: "",
 }
+
+export const verifyCode = createAsyncThunk(
+    "register/verifyCode",
+    async (body: VerifyCode, thunkAPI) => {
+        try {
+            const request = await axios.post("http://localhost:8888/authenticate/email/verification/verify", body);
+            return request.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    })
 
 export const registerUser = createAsyncThunk(
     "register/register",
@@ -148,6 +166,14 @@ export const RegisterSlice = createSlice({
             return state;
         });
 
+        builder.addCase(verifyCode.pending, (state, action) => {
+            state = {
+                ...state,
+                loading: true
+            }
+            return state;
+        })
+
         builder.addCase(sendVerificationEmail.pending, (state, action) => {
             state = {
                 ...state,
@@ -190,6 +216,17 @@ export const RegisterSlice = createSlice({
             return state;
         });
 
+        builder.addCase(verifyCode.fulfilled, (state, action) => {
+            let nextStep = state.step + 1;
+            state = {
+                ...state,
+                loading: false,
+                error: false,
+                step: nextStep
+            }
+            return state;
+        });
+
         builder.addCase(registerUser.rejected, (state, action) => {
             state.error = true;
             state.loading = false;
@@ -204,6 +241,7 @@ export const RegisterSlice = createSlice({
             }
             return state;
         });
+
         builder.addCase(sendVerificationEmail.rejected, (state, action) => {
             state = {
                 ...state,
@@ -211,7 +249,17 @@ export const RegisterSlice = createSlice({
                 error: true
             }
             return state;
-        })
+        });
+
+        builder.addCase(verifyCode.rejected, (state, action) => {
+            state = {
+                ...state,
+                loading: false,
+                error: true
+            }
+            return state;
+        });
+
 
     }
 });

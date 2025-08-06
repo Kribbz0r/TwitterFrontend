@@ -10,7 +10,7 @@ import { ValidatedTextInput } from "../../../../../components/validatedInput/Val
 import { validateSwedishPhoneNumber } from "../../../../../services/Validators";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../../redux/Store";
-import { updateUserPhoneNumber, sendVerificationEmail } from "../../../../../redux/slices/RegisterSlice";
+import { updateUserPhoneNumber, sendVerificationEmail, updateRegister } from "../../../../../redux/slices/RegisterSlice";
 
 
 export const FormFour: React.FC = () => {
@@ -30,6 +30,12 @@ export const FormFour: React.FC = () => {
 
     const changePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPhoneNumber(e.target.value);
+        dispatch(updateRegister(
+            {
+                name: "phoneNumber",
+                value: e.target.value
+            }
+        ))
     }
 
     const sendPhoneNumber = async () => {
