@@ -42,6 +42,11 @@ interface VerifyCode {
     verificationCode: string;
 }
 
+interface UppdatePassword {
+    username: string;
+    password: string;
+}
+
 const initialState: RegisterSliceState = {
     loading: false,
     error: false,
@@ -109,6 +114,19 @@ export const updateUserPhoneNumber = createAsyncThunk(
 
 )
 
+export const updateUserPassword = createAsyncThunk(
+    "register/password",
+    async (body: UppdatePassword, thunkAPI) => {
+        try {
+            axios.put("http://localhost:8888/authenticate/update/password", body);
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+
+    }
+
+)
+
 
 export const RegisterSlice = createSlice({
     name: "register",
@@ -166,6 +184,14 @@ export const RegisterSlice = createSlice({
             return state;
         });
 
+        builder.addCase(updateUserPassword.pending, (state, action) => {
+            state = {
+                ...state,
+                loading: true
+            }
+            return state;
+        })
+
         builder.addCase(verifyCode.pending, (state, action) => {
             state = {
                 ...state,
@@ -193,6 +219,16 @@ export const RegisterSlice = createSlice({
             }
             return state;
         });
+
+        builder.addCase(updateUserPassword.fulfilled, (state, action) => {
+            state = {
+                ...state,
+                loading: false,
+                error: false
+            }
+            console.log("Last step of registration done. Forward user to homepage");
+            console.log("make login call so that the user gets a JWT token");
+        })
 
         builder.addCase(updateUserPhoneNumber.fulfilled, (state, action) => {
             let nextStep = state.step + 1
@@ -227,9 +263,18 @@ export const RegisterSlice = createSlice({
             return state;
         });
 
-        builder.addCase(registerUser.rejected, (state, action) => {
+        builder.addCase(updateUserPassword.rejected, (state, action) => {
             state.error = true;
             state.loading = false;
+            return state;
+        })
+
+        builder.addCase(registerUser.rejected, (state, action) => {
+            state = {
+                ...state,
+                loading: false,
+                error: true
+            }
             return state;
         });
 
