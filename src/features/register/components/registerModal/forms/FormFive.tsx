@@ -42,9 +42,9 @@ export const FormFive: React.FC = () => {
                     label={"verification code"}
                     changeValue={handleChange} />
                 <p className="registerStepFiveMessage" onClick={resendEmail}>Didn't receive an email?</p>
-                <StyledNextBtn active={code ? true : false} disabled={code ? false : true} color={"black"}
-                    onClick={verify}>Next</StyledNextBtn>
             </div>
+            <StyledNextBtn active={code ? true : false} disabled={code ? false : true} color={"black"}
+                onClick={verify}>Next</StyledNextBtn>
         </div>
     )
 

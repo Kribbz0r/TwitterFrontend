@@ -3,7 +3,8 @@ import { FormOne } from "../register/components/registerModal/forms/FormOne";
 import { FormThree } from "../register/components/registerModal/forms/FormThree";
 import { FormTwo } from "../register/components/registerModal/forms/FormTwo";
 import { FormFive } from "../register/components/registerModal/forms/FormFive";
-import { FormSix } from "../register/components/registerModal/forms/formSix";
+import { FormSix } from "../register/components/registerModal/forms/FormSix";
+
 
 export const determineModalContent = (step: number): React.ReactElement => {
 

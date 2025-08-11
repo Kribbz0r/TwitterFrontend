@@ -1,4 +1,4 @@
-.registerFormFiveContainer {
+.registerStepFiveContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.registerFormFiveContent {
+.registerStepFiveContent {
     width: 75%;
     display: flex;
     flex-direction: column;

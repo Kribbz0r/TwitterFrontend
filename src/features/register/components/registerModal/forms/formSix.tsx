@@ -3,6 +3,7 @@ import { ValidatedTextInput } from "../../../../../components/validatedInput/Val
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { StyledNextBtn } from "../../registrationNextBtn/RegisterNextBtn";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../../../../redux/Store";
 import { updateUserPassword } from "../../../../../redux/slices/RegisterSlice";
@@ -13,6 +14,8 @@ export const FormSix: React.FC = () => {
     const state = useSelector((state: RootState) => state.register);
     const dispatch: AppDispatch = useDispatch()
 
+    const navigate = useNavigate();
+
     const [active, setActive] = useState<boolean>(false);
     const [password, setPassword] = useState<string>("");
 
@@ -20,11 +23,14 @@ export const FormSix: React.FC = () => {
         setPassword(e.target.value);
     }
 
-    const sendPassword = () => {
-        dispatch(updateUserPassword({
+    const sendPassword = async () => {
+        await dispatch(updateUserPassword({
             username: state.username,
             password
-        }))
+        }));
+        console.log("navigate");
+        navigate("/home");
+
     }
 
     const toggleActive = () => {

@@ -1,0 +1,25 @@
+.registerStepSixContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registerStepSixContent {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.registerStepSixPassword {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.registerStepSixIcon {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    cursor: pointer;
+}
